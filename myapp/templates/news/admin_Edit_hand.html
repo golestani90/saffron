@@ -1,0 +1,21 @@
+{% extends 'news/admin_Edit_rss.html' %}
+{% load staticfiles %}
+{% block sub_title %} اخبار امروز{% endblock %}
+{% block place %}
+<i class="fa fa-coffee"></i>
+							<a href="#">
+								اخبار
+							</a>
+							<i class="fa fa-angle-left"></i>
+<i class="fa fa-magic"></i>
+							<a href="{% url 'myapp.views.admin_news_hand' %}">
+								اخبار دستی
+							</a>
+							<i class="fa fa-angle-left"></i>
+<i class="fa fa-edit"></i>
+		<a href="#">
+								ویرایش
+		</a>
+
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'parent/admin_parent.html' %}
+
+{% block title %} مدیریت اخبار {% endblock %}
+{% block place %}<i class="fa fa-coffee"></i>
+							<a href="#">
+								اخبار
+							</a>
+							<i class="fa fa-angle-left"></i>
+<i class="fa fa-rss"></i>
+							<a href="{% url 'myapp.views.admin_news_rss' %}">
+								اخبار rss
+							</a>
+							<i class="fa fa-angle-left"></i>
+{% block place1 %}{% endblock %}
+{% endblock %}
+{% block body %}
+ <div class="col-md-12 col-sm-12">
+ <div class="portlet box grey tasks-widget">
+    <div class="portlet-title">
+							<div class="caption">
+                                {% block sub_title %}
+								<i class="fa fa-check"></i>rss های امروز
+                                    {% endblock %}
+							</div>
+
+							<div class="actions">
+                                <div class="btn-group">
+									<a class="btn default btn-xs" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                        <i class="fa fa-trash-o"></i>
+										حذف
+									</a>
+                                </div>
+                                <div class="btn-group">
+									<a class="btn default btn-xs" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                        <i class="fa fa-check"></i>
+										افزودن
+									</a>
+                                </div>
+								<div class="btn-group">
+									<a class="btn default btn-xs" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+										 ب?شتر <i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="dropdown-menu pull-right">
+										<li>
+											<a href="#">
+												<i class="i"></i> همه rss ها
+											</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li>
+											<a href="#">
+												روز گذشته
+											</a>
+										</li>
+										<li>
+											<a href="#">
+											هفته گذشته
+											</a>
+										</li>
+										<li>
+											<a href="#">
+													 انتخاب تار?خ
+											</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li>
+											<a href="#">
+												 ثبت نشده
+												<span class="badge badge-important">
+													18
+												</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												 بررس? شده
+												<span class="badge badge-success">
+													 12
+												</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												 نما?ش در صفحه
+												<span class="badge badge-warning">
+													 9
+												</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+ <div class="portlet-body" style="">
+     <div class="task-content">
+         <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 305px;"><div class="scroller" style="height: 305px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+     {% block content_rss %}{% endblock %}
+     </div>
+             </div>
+     </div>
+  </div>
+
+ </div>
+      <div class="portlet paddingless">
+      {% block content_rss2 %}{% endblock %}
+      </div>
+{% endblock %}

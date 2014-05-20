@@ -1,0 +1,147 @@
+{% extends 'parent/admin_parent.html' %}
+{% load staticfiles %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap-wysihtml5/bootstrap-wysihtml5-rtl.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap-markdown/css/bootstrap-markdown.min.css' %}">
+{% endblock %}
+{% block title %}مدیریت اخبار{% endblock %}
+{% block place %}<i class="fa fa-coffee"></i>
+							<a href="#">
+								اخبار
+							</a>
+							<i class="fa fa-angle-left"></i>
+<i class="fa fa-magic"></i>
+							<a href="{% url 'myapp.views.admin_news_hand' %}">
+								اخبار دستی
+							</a>
+							<i class="fa fa-angle-left"></i>{% endblock %}
+{% block body %}
+
+    <div class="portlet">
+        <div class="portlet-title">
+            <div class="caption">
+									<i class="fa fa-magic"></i>اخبار دستی
+            </div>
+            <div class="actions btn-set">
+
+                <button class="btn default"><i class="fa fa-reply"></i> بازنویسی فرم</button>
+                <button  id="Add" class="btn green"><i class="fa fa-check"></i> ذخیره</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="portlet-body">
+    <div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tab_general" data-toggle="tab">
+                ثبت خبر
+            </a>
+        </li>
+
+    </ul>
+    <div class="tab-content no-space">
+    <div class="tab-pane active" id="tab_general">
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-2 control-label">عنوان خبر
+                    <span class="required">
+                        *
+                    </span>
+                </label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="title_news" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">متن خبر
+                    <span class="required">
+                        *
+					</span>
+				</label>
+                <div class="col-md-9">
+
+                    <textarea name="body_news" class="wysihtml5 form-control" rows="6  "></textarea>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">گروه
+
+                </label>
+                <div class="col-md-10">
+                    <select class="table-group-action-input form-control input-medium" name="group_news">
+                        <option value="0">انتخاب...</option>
+                        <option value="1">خالی</option>
+                        <option value="2">گروه یک</option>
+                        <option value="3">گروه دو</option>
+                        <option value="4">گروه سه</option>
+                    </select>
+     			</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile"  class="col-md-2 control-label">افزودن عکس</label>
+            <div class="col-md-9">
+                <input type="file"  name="pic_news" multiple="" id="exampleInputFile">
+            </div>
+        </div>
+    </div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" %}"></script>
+    <script src="{% static 'plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js' %}"></script>
+    <script src="{% static 'plugins/ckeditor/ckeditor.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-markdown/lib/markdown.js' %}" ></script>
+    <script src="{% static 'plugins/bootstrap-markdown/js/bootstrap-markdown.js' %}" ></script>
+    <script src="{% static 'scripts/core/app.js' %}"></script>
+    <script src="{% static 'scripts/custom/components-editors.js' %}"></script>
+    <script>
+jQuery(document).ready(function() {
+   // initiate layout and plugins
+   App.init();
+   ComponentsEditors.init();
+
+    $('#Add').click(function(){
+        var title = $("input[name=title_news]").val();
+{#        alert(title);#}
+        var body =  $("textarea[name=body_news]").val();
+        var group =  $("select[name=group_news]").val();
+{#        var pic =  $("input[name=pic_news]").val();#}
+        $.post("/insert/hand",{
+            Title_news : title ,
+            Text_news : body ,
+            Category_news : group
+        },function(data){
+{#             $('#Add').hide();#}
+            alert(data);
+        });
+    });
+});
+{#    });#}
+{#    var kh="golestani";#}
+{#    document.write(kh);#}
+{#if(kh != "o"){#}
+{#     alert(kh);#}
+
+{#    for(i=0;i<=10;i++){#}
+{#        document.write("kh");#}
+{#    }#}
+{#    var md="685";#}
+{#    var intr =parseInt(md);#}
+{#    var c=200;#}
+{#    var s= c.toString();#}
+
+</script>
+
+{% endblock %}

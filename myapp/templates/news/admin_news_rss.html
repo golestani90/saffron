@@ -1,0 +1,169 @@
+{% extends 'parent/admin_parent.html' %}
+
+{% load staticfiles %}
+{% block title %} مدیریت اخبار {% endblock %}
+{% block css %}
+<link href="{% static 'plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'plugins/bootstrap-modal/css/bootstrap-modal.css' %}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="{% static 'plugins/bootstrap-wysihtml5/bootstrap-wysihtml5-rtl.css' %}"/>
+<link rel="stylesheet" href="{% static 'plugins/bootstrap-wysihtml5/wysiwyg-color.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap-markdown/css/bootstrap-markdown.min.css' %}">
+{% endblock %}
+{% block place %}
+    <i class="fa fa-coffee"></i>
+    <a href="#">
+        اخبار
+    </a>
+    <i class="fa fa-angle-left"></i>
+    <i class="fa fa-rss"></i>
+    <a href="{% url 'myapp.views.admin_news_rss' %}">
+        اخبار rss
+    </a>
+    <i class="fa fa-angle-left"></i>
+
+{% endblock %}
+{% block body %}
+    <div class="row">
+    <div class="col-md-12 col-sm-12">
+					<div class="portlet box grey tasks-widget">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-check"></i>rss های امروز
+							</div>
+
+							<div class="actions">
+                                <div class="btn-group">
+									<a class="btn default btn-xs" href="#" id="del">
+                                        <i class="fa fa-trash-o"></i>
+										حذف
+									</a>
+                                </div>
+                                <div class="btn-group">
+									<a class="btn default btn-xs" href="#" >
+                                        <i class="fa fa-check"></i>
+										افزودن
+									</a>
+                                </div>
+								<div class="btn-group">
+									<a class="btn default btn-xs" href="#" >
+										 بیشتر <i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="dropdown-menu pull-right">
+										<li>
+											<a href="#">
+												<i class="i"></i> همه rss ها
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												روز گذشته
+											</a>
+										</li>
+										<li>
+											<a href="#">
+											هفته گذشته
+											</a>
+										</li>
+										<li>
+											<a href="#">
+													 انتخاب تاریخ
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body" style="overflow-y:visible;">
+							<div class="task-content">
+								<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 305px;"><div class="scroller" style="height: 305px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+                                <table  class="table">
+                                    <tbody>
+
+                                     <tr>
+                                      <td>
+                                          <div class="task-checkbox">
+                                             <input type="checkbox" value="123" name="chck1">
+                                              title
+										  </div>
+                                      </td>
+
+                                       <td>
+                                           <div class="portlet">
+                                               <div class="portlet-title">
+                                                   <div class="caption">
+                                                       <i class="fa fa-reorder"></i><h5>نمایش متن خبر</h5>
+                                                   </div>
+                                                   <div class="tools">
+                                                       <a href="javascript:;" class="expand">
+                                                       </a>
+                                                   </div>
+                                               </div>
+                                               <div class="portlet-body display-hide">
+                                                   <strong></strong>
+                                                   <p>
+
+                                                   </p>
+                                               </div>
+                                           </div>
+                                       </td>
+                                     </tr>
+
+                                    </tbody>
+                                </table>
+                                </div>
+                                    <div class="slimScrollBar" style="background-color: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; left: 1px; height: 265.7857142857143px; background-position: initial initial; background-repeat: initial initial;">
+
+                                    </div>
+/*{#                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(234, 234, 234); opacity: 0.2; z-index: 90; left: 1px; background-position: initial initial; background-repeat: initial initial;"></div>#}*/
+                                </div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static "plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" %}"></script>
+    <script src="{% static 'plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-modal/js/bootstrap-modalmanager.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-modal/js/bootstrap-modal.js' %}"></script>
+
+    <script src="{% static 'scripts/core/app.js' %}"></script>
+    <script src="{% static 'scripts/custom/ui-extended-modals.js' %}"></script>
+<script>
+{#    function fh(){#}
+{#        alert('fhhhhhhh');#}
+{#    }#}
+
+{#    $('#uio').click(function(){#}
+{#       $('#but_delete input[type=checkbox]').each(function(){#}
+{#           $(this).click();#}
+{#           if($(this). == true){#}
+{#           alert($(this).val());#}
+{#           }#}
+{##}
+{#        });#}
+{##}
+{#    });#}
+
+    jQuery(document).ready(function() {
+   // initiate layout and plugins
+
+   UIExtendedModals.init();
+{#   $("#del").click(function(){#}
+{#       $("input[type=checkbox]").each(function(){#}
+{#           $(this).click();#}
+{#           if($(this). == true){#}
+{#           var list = $(this).val();#}
+{#           }#}
+{#           $post("/delete/news",{List : list},function(data){#}
+{#               alert(data);#}
+{#           });#}
+{##}
+{#       });#}
+{#   });#}
+
+})
+</script>
+{% endblock %}
