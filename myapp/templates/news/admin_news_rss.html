@@ -78,12 +78,12 @@
 								<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 305px;"><div class="scroller" style="height: 305px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
                                 <table  class="table">
                                     <tbody>
-
+                                    {% for i in entry %}
                                      <tr>
                                       <td>
                                           <div class="task-checkbox">
                                              <input type="checkbox" value="123" name="chck1">
-                                              title
+                                              {{ i.title }}
 										  </div>
                                       </td>
 
@@ -101,13 +101,13 @@
                                                <div class="portlet-body display-hide">
                                                    <strong></strong>
                                                    <p>
-
+                                                   {{ i.description }}
                                                    </p>
                                                </div>
                                            </div>
                                        </td>
                                      </tr>
-
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                                 </div>

@@ -16,8 +16,9 @@ def admin_parent(request):
 """========================================================="""
 
 def admin_news_rss(request):
-
-    return render(request, 'news/admin_news_rss.html')
+    feed1 = feedparser.parse('http://www.irna.ir/fa/rss.aspx?kind=-1')
+    entry = feed1.entries
+    return render(request,'news/admin_news_rss.html',{'entry': entry})
 """========================================================="""
 def admin_news_hand(request):
 
@@ -65,10 +66,6 @@ def insert_news_hand(request):
 #        one_news.delete()
 #    message=u"تغییرات با موفقیت انجام شد."
 #    return (message)
-def rss(request):
-   feed1 = feedparser.parse('http://www.irna.ir/fa/rss.aspx?kind=-1')
-   for i in feed1:
-       tit=i.title
-       des=i.description
-       lin= i.link
+
+
        

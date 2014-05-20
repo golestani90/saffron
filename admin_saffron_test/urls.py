@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^news/edit/rss$', 'myapp.views.admin_news_edit_rss', name='admin_news_edit_rss'),
     url(r'^news/edit/hand$', 'myapp.views.admin_news_edit_hand', name='admin_news_edit_hand'),
     url(r'^insert/hand$', "myapp.views.insert_news_hand", name='insert_news_hand'),
+
     #url(r'^delete/news$', 'myapp.views.delete_news_rss', name='delete_news_rss'),
     #url(r'^insert/news$', 'myapp.feed.update_feeds', name='insert_news_rss'),
 
