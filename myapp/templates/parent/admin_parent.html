@@ -5,7 +5,6 @@
 <!--[if !IE]><!-->
 <html lang="en" class="no-js">
 <!--<![endif]-->
-<!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
 <title>management</title>
@@ -250,8 +249,7 @@
 						<span class="title">
 							اخبار
 						</span>
-						<span class="fa-angle-down">
-						</span>
+
 					</a>
 
 					<ul class="sub-menu">
@@ -270,6 +268,22 @@
 
 					</ul>
 				</li>
+                <li>
+                    <a href="javascript:;" class="angle-down">
+                        <i class="fa fa-barcode"></i>
+                        <span class="title">
+							فروشگاه
+						</span>
+                    </a>
+                    <ul class="sub-menu">
+						<li>
+							<a href="{% url 'myapp.views.view_price' %}">
+								<i class="fa fa-edit"></i>
+							وارد کردن قیمت
+							</a>
+						</li>
+                    </ul>
+                </li>
 
 
 			</ul>
@@ -316,17 +330,17 @@
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
-        <ul class="page-breadcrumb breadcrumb"><li>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
 							<i class="fa fa-home"></i>
 							<a href="#">
 								خانه
 							</a>
 							<i class="fa fa-angle-left"></i>
-						</li>
+
 						{% block place %}{% endblock %}
-
-
-					</ul>
+        	</li>
+		</ul>
          {% block body %}
 
         {% endblock %}
@@ -395,7 +409,7 @@
       jQuery(document).ready(function() {
          App.init();
       });
-   </script>
+</script>
 {% block js %}{% endblock %}
  <!-- END JAVASCRIPTS -->
 <!--ipt type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</scri--></body>

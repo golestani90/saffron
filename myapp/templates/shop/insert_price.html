@@ -1,0 +1,42 @@
+{% extends 'parent/admin_parent.html' %}
+{% load staticfiles %}
+{% block title%}
+    فروشگاه
+{% endblock %}
+{% block place %}
+      <i class="fa fa-barcode"></i>
+    <a href="#">
+    فروشگاه
+    </a>
+    <i class="fa fa-angle-left"></i>
+    <i class="fa fa-edit"></i>
+    <a href="{% url 'myapp.views.view_price' %}">
+    وارد کردن قیمت
+    </a>
+{% endblock %}
+{% block body %}
+    {{ msg }}
+    <h4><p>فرم مشخصات محصول</p></h4>
+    <form action="/insert/price" method="post">
+    {% csrf_token %}
+    <div class="form-group ">
+     <label>      <h6> قیمت محصول بر اساس یک مثقال</h6>
+       <input type="text" class="form-control input-medium" name="price" >
+     </label>
+      <label>     <h6> نام محصول </h6>
+       <input type="text" class="form-control input-medium" name="name" >
+     </label>
+      <label>      <h6>   سطح کیفیت  </h6>
+       <input type="text" class="form-control input-medium" name="degree">
+     </label>
+      <label>     <h6>  عکس محصول </h6>
+       <input type="file" class="form-control input-medium" name="pic" >
+     </label>
+     <input type="submit" value="ثبت محصول" class="btn green">
+   </div>
+        </form>
+    <h4><p>
+        دیگر فرم های لازم برای فروشگاه
+    </p></h4>
+
+{% endblock %}

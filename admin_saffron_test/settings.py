@@ -62,7 +62,7 @@ ROOT_URLCONF = 'admin_saffron_test.urls'
 
 WSGI_APPLICATION = 'admin_saffron_test.wsgi.application'
 #TEMPLATE_LOADERS = 'django_linestripper.stripper.Loader'
-DEFAULT_INDEX_TABLESPACE = 1
+DEFAULT_INDEX_TABLESPACE = ''
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

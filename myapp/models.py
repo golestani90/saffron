@@ -5,6 +5,11 @@ from django.forms import ModelForm
 
 # Create your models here.
 #=========================================================================
+class Product(models.Model):
+    Name_pro = models.CharField(max_length=50)
+    State_pro = models.CharField(max_length=50)
+    Price_pro = models.IntegerField()
+#=========================================================================
 class News(models.Model):
 
     Link_news = models.CharField(max_length=100, primary_key=True)

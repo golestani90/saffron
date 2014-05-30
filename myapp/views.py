@@ -2,7 +2,7 @@
 from django.shortcuts import HttpResponse
 from django.shortcuts import render
 #from django_ajax.decorators import ajax
-from  myapp.models import News,News_pic
+from  myapp.models import News,News_pic, Product
 import datetime
 #from feedreader import *
 from myapp.tst_db import saffron_db
@@ -31,6 +31,23 @@ def admin_news_edit_rss(request):
 def admin_news_edit_hand(request):
 
     return render(request, 'news/admin_Edit_hand.html')
+"""========================================================="""
+def view_price(request):
+
+    return render(request, 'shop/insert_price.html')
+"""========================================================="""
+def insert_price(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        degree = request.POST.get('degree')
+        price = request.POST.get('price')
+    product = Product(Name_pro=name, State_pro=degree, Price_pro=price)
+    product.save()
+    messege = u"محصول با موفقیت ثبت شد!"
+
+    return render(request, 'shop/insert_price.html', {'msg': messege})
+
+
 
 
 
