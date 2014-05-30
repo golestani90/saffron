@@ -62,7 +62,7 @@ ROOT_URLCONF = 'admin_saffron_test.urls'
 
 WSGI_APPLICATION = 'admin_saffron_test.wsgi.application'
 #TEMPLATE_LOADERS = 'django_linestripper.stripper.Loader'
-
+DEFAULT_INDEX_TABLESPACE = 1
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -101,6 +101,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
 #STATIC_ROOT = BASE_DIR+'/myapp/static/'
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,

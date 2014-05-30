@@ -17,7 +17,9 @@
 							<i class="fa fa-angle-left"></i>{% endblock %}
 {% block body %}
 
-    <div class="portlet">
+    <form id="mForm" action="/insert/hand" method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+        <div class="portlet">
         <div class="portlet-title">
             <div class="caption">
 									<i class="fa fa-magic"></i>اخبار دستی
@@ -94,7 +96,7 @@
 							</div>
 						</div>
 
-
+</form>
 {% endblock %}
 {% block js %}
     <script src="{% static "plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" %}"></script>
@@ -111,19 +113,30 @@ jQuery(document).ready(function() {
    // initiate layout and plugins
    App.init();
    ComponentsEditors.init();
+{##}
 
+    $("#mForm").submit(function(){
+        return false;
+    });
     $('#Add').click(function(){
+
         var title = $("input[name=title_news]").val();
-{#        alert(title);#}
-        var body =  $("textarea[name=body_news]").val();
+        alert(title);
+        var body1 =  $("textarea[name=body_news]").val();
+        alert(body1);
         var group =  $("select[name=group_news]").val();
-{#        var pic =  $("input[name=pic_news]").val();#}
+
+        var pic =  $("input[name=pic_news]").val();
+
+        var csr = $("input[name=csrfmiddlewaretoken]").val();
+
         $.post("/insert/hand",{
-            Title_news : title ,
-            Text_news : body ,
-            Category_news : group
+            title_news : title ,
+            body_news : body1 ,
+            group_news : group,
+            csrfmiddlewaretoken: csr
         },function(data){
-{#             $('#Add').hide();#}
+             $('#Add').hide();
             alert(data);
         });
     });

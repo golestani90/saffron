@@ -39,7 +39,7 @@
 									</a>
                                 </div>
                                 <div class="btn-group">
-									<a class="btn default btn-xs" href="#" >
+									<a class="btn default btn-xs" id="insert" >
                                         <i class="fa fa-check"></i>
 										افزودن
 									</a>
@@ -75,18 +75,19 @@
 						</div>
 						<div class="portlet-body" style="overflow-y:visible;">
 							<div class="task-content">
-								<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 305px;"><div class="scroller" style="height: 305px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1">
+								<div >
                                 <table  class="table">
                                     <tbody>
+{#                                    {% setvar ssg = 0 %}#}
                                     {% for i in entry %}
                                      <tr>
                                       <td>
                                           <div class="task-checkbox">
-                                             <input type="checkbox" value="123" name="chck1">
+                                             <input type="checkbox" value="sd_{{ ssg }}" id="tit">
                                               {{ i.title }}
 										  </div>
                                       </td>
-
+{#                                         {% setvar ssg += 1 %}#}
                                        <td>
                                            <div class="portlet">
                                                <div class="portlet-title">
@@ -100,20 +101,23 @@
                                                </div>
                                                <div class="portlet-body display-hide">
                                                    <strong></strong>
-                                                   <p>
+                                                   <p id="des" data-vl="sd_{{ ssg }}">
                                                    {{ i.description }}
                                                    </p>
                                                </div>
                                            </div>
                                        </td>
+                                     <td id="img">
+                                         {{ i.img }}
+                                     </td>
                                      </tr>
                                     {% endfor %}
                                     </tbody>
                                 </table>
                                 </div>
-                                    <div class="slimScrollBar" style="background-color: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; left: 1px; height: 265.7857142857143px; background-position: initial initial; background-repeat: initial initial;">
-
-                                    </div>
+{#                                    <div class="slimScrollBar" style="background-color: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; left: 1px; height: 265.7857142857143px; background-position: initial initial; background-repeat: initial initial;">#}
+{##}
+{#                                    </div>#}
 /*{#                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(234, 234, 234); opacity: 0.2; z-index: 90; left: 1px; background-position: initial initial; background-repeat: initial initial;"></div>#}*/
                                 </div>
 							</div>
@@ -122,6 +126,7 @@
 					</div>
 				</div>
     </div>
+    {% csrf_token %}
 {% endblock %}
 {% block js %}
     <script src="{% static "plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" %}"></script>
@@ -132,37 +137,36 @@
     <script src="{% static 'scripts/core/app.js' %}"></script>
     <script src="{% static 'scripts/custom/ui-extended-modals.js' %}"></script>
 <script>
-{#    function fh(){#}
-{#        alert('fhhhhhhh');#}
-{#    }#}
 
-{#    $('#uio').click(function(){#}
-{#       $('#but_delete input[type=checkbox]').each(function(){#}
-{#           $(this).click();#}
-{#           if($(this). == true){#}
-{#           alert($(this).val());#}
-{#           }#}
-{##}
-{#        });#}
-{##}
-{#    });#}
 
     jQuery(document).ready(function() {
    // initiate layout and plugins
 
    UIExtendedModals.init();
-{#   $("#del").click(function(){#}
-{#       $("input[type=checkbox]").each(function(){#}
+   $("#insert").click(function(){
+       var list ='';
+       $("input[type=checkbox]").filter(":checked").each(function(){
 {#           $(this).click();#}
 {#           if($(this). == true){#}
-{#           var list = $(this).val();#}
-{#           }#}
-{#           $post("/delete/news",{List : list},function(data){#}
-{#               alert(data);#}
-{#           });#}
-{##}
-{#       });#}
-{#   });#}
+{#               alert($(this).val());#}
+{#               list += $(this).val()+"__";#}
+               {#           }#}
+
+
+
+            var csr = $("input[name=csrfmiddlewaretoken]").val();
+           alert(list);
+           $.post("/save/rss",{
+               List : list,
+               csrfmiddlewaretoken:csr
+           },function(data){
+                   alert(data);
+               });
+
+       });
+
+
+   });
 
 })
 </script>

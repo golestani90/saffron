@@ -37,12 +37,16 @@ def admin_news_edit_hand(request):
 """===========================jquery&&ajax==========================================================================="""
 
 def insert_news_hand(request):
+    if request.method == "GET":
+        return render(request,'news/admin_news_hand.html')
     if request.method == "POST":
    #img = request.FILES['pic_news'].name
    #file1 = Image.open(request.FILES['pic_news'])
    #file1.save("myapp/static/img/" + img)
         Text_news=request.POST.get('body_news')
-        Title_news=request.POST.get('Title_news')
+        print(Text_news)
+        Title_news=request.POST.get('title_news')
+        print(Title_news)
         Category_news=request.POST.get('group_news')
         #group_link=request.POST.get('select')
 
@@ -53,19 +57,33 @@ def insert_news_hand(request):
         #news2.save()
         #
         #saffron_db("INSERT INTO `news`(`title`,`text`) VALUES(`"+Title_news+"`,`"+Text_news+"`)")
-        Object_news = News(Text_news=Text_news, Category_news=Category_news, Title_news=Title_news, Time_news=Time_news)
+        Object_news = News(Text_news=Text_news, Category_news=Category_news, Title_news=Title_news, Time_news=Time_news,Num_view_news=1)
         Object_news.save()
 
         message=u"تغییرات با موفقیت انجام شد."
         return HttpResponse(message)
 """========================================================="""
 
-#def delete_news_rss(request, List):
-#    for i in List:
-#        one_news = News.objects.filter(i)
-#        one_news.delete()
-#    message=u"تغییرات با موفقیت انجام شد."
-#    return (message)
+def insert_news_rss(request):
+    if request.method == 'POST':
+        List = request.POST.get('List')
+        print(List)
+        #for i in str(List).split("__"):
+        #    if i != '':
+        #        print(i)
+
+
+
+
+
+
+
+        #for i in List:
+        #    one_news = News.objects.filter(i)
+        #    Object_news = News(Text_news=one_news.description, Title_news=one_news.title)
+        #    Object_news.save()
+        #message=u"تغییرات با موفقیت انجام شد."
+        #return (message)
 
 
        
