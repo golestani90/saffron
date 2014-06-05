@@ -16,6 +16,7 @@
 							</a>
 							<i class="fa fa-angle-left"></i>{% endblock %}
 {% block body %}
+    {{ msg }}
 
     <form id="mForm" action="/insert/hand" method="post" enctype="multipart/form-data">
  {% csrf_token %}
@@ -24,12 +25,7 @@
             <div class="caption">
 									<i class="fa fa-magic"></i>اخبار دستی
             </div>
-            <div class="actions btn-set">
 
-                <button class="btn default"><i class="fa fa-reply"></i> بازنویسی فرم</button>
-                <button  id="Add" class="btn green"><i class="fa fa-check"></i> ذخیره</button>
-
-            </div>
         </div>
     </div>
     <div class="portlet-body">
@@ -63,7 +59,19 @@
 				</label>
                 <div class="col-md-9">
 
-                    <textarea name="body_news" class="wysihtml5 form-control" rows="6  "></textarea>
+                    <textarea name="body_news" class="wysihtml5 form-control" rows="6"></textarea>
+                </div>
+
+            </div>
+             <div class="form-group">
+                <label class="col-md-2 control-label">    ادامه مطلب
+                    <span class="required">
+                        *
+					</span>
+				</label>
+                <div class="col-md-9">
+
+                    <textarea name="body_news_len" class="wysihtml5 form-control" rows="6"></textarea>
                 </div>
 
             </div>
@@ -72,7 +80,7 @@
                 <label class="col-md-2 control-label">گروه
 
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-5">
                     <select class="table-group-action-input form-control input-medium" name="group_news">
                         <option value="0">انتخاب...</option>
                         <option value="1">خالی</option>
@@ -81,6 +89,9 @@
                         <option value="4">گروه سه</option>
                     </select>
      			</div>
+                <div class=" col-md-5 actions btn-set">
+                <input type="submit" value="ذخیره" id="Add" class="btn green">
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -88,13 +99,15 @@
             <div class="col-md-9">
                 <input type="file"  name="pic_news" multiple="" id="exampleInputFile">
             </div>
+
         </div>
+
+    </div>
+    </div>
     </div>
 
-									</div>
-								</div>
-							</div>
-						</div>
+    </div>
+
 
 </form>
 {% endblock %}
@@ -115,31 +128,34 @@ jQuery(document).ready(function() {
    ComponentsEditors.init();
 {##}
 
-    $("#mForm").submit(function(){
-        return false;
-    });
-    $('#Add').click(function(){
-
-        var title = $("input[name=title_news]").val();
-        alert(title);
-        var body1 =  $("textarea[name=body_news]").val();
-        alert(body1);
-        var group =  $("select[name=group_news]").val();
-
-        var pic =  $("input[name=pic_news]").val();
-
-        var csr = $("input[name=csrfmiddlewaretoken]").val();
-
-        $.post("/insert/hand",{
-            title_news : title ,
-            body_news : body1 ,
-            group_news : group,
-            csrfmiddlewaretoken: csr
-        },function(data){
-             $('#Add').hide();
-            alert(data);
-        });
-    });
+{#    $("#mForm").submit(function(){#}
+{#        return false;#}
+{#    });#}
+{#    $('#Add').click(function(){#}
+{##}
+{#        var title = $("input[name=title_news]").val();#}
+{##}
+{#        var body1 =  $("textarea[name=body_news]").val();#}
+{##}
+{#         var body12 =  $("textarea[name=body_news_len]").val();#}
+{##}
+{#        var group =  $("select[name=group_news]").val();#}
+{##}
+{#        var pic =  $("input[name=pic_news]").val();#}
+{##}
+{#        var csr = $("input[name=csrfmiddlewaretoken]").val();#}
+{##}
+{#        $.post("/insert/hand",{#}
+{#            title_news : title ,#}
+{#            body_news : body1 ,#}
+{#            group_news : group,#}
+{#            body_news_len : body12,#}
+{#            csrfmiddlewaretoken: csr#}
+{#        },function(data){#}
+{#             $('#Add').hide();#}
+{#            alert(data);#}
+{#        });#}
+{#    });#}
 });
 {#    });#}
 {#    var kh="golestani";#}

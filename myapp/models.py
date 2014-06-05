@@ -6,14 +6,19 @@ from django.forms import ModelForm
 # Create your models here.
 #=========================================================================
 class Product(models.Model):
+
     Name_pro = models.CharField(max_length=50)
     State_pro = models.CharField(max_length=50)
     Price_pro = models.IntegerField()
+    Price_pro_g = models.IntegerField()
+    Price_pro_k = models.IntegerField()
+    id_pro = models.AutoField(primary_key=True)
 #=========================================================================
 class News(models.Model):
 
-    Link_news = models.CharField(max_length=100, primary_key=True)
-    Text_news = models.CharField(max_length=1000)
+    #Link_news = models.CharField(max_length=100, primary_key=True)
+    Text_news = models.CharField(max_length=100)
+    Text_news_len = models.CharField(max_length=1000)
     Category_news = models.CharField(max_length=200)
     Title_news = models.CharField(max_length=300)
     Time_news = models.DateTimeField()

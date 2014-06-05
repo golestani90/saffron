@@ -33,7 +33,7 @@
 
 							<div class="actions">
                                 <div class="btn-group">
-									<a class="btn default btn-xs" href="#" id="del">
+									<a class="btn default btn-xs" href="#" id="delete">
                                         <i class="fa fa-trash-o"></i>
 										حذف
 									</a>
@@ -81,9 +81,9 @@
 {#                                    {% setvar ssg = 0 %}#}
                                     {% for i in entry %}
                                      <tr>
-                                      <td>
+                                      <td style="background: #ffffff">
                                           <div class="task-checkbox">
-                                             <input type="checkbox" value="sd_{{ ssg }}" id="tit">
+                                             <input type="checkbox" value="{{ i.description }}" id="tit">
                                               {{ i.title }}
 										  </div>
                                       </td>
@@ -115,10 +115,6 @@
                                     </tbody>
                                 </table>
                                 </div>
-{#                                    <div class="slimScrollBar" style="background-color: rgb(187, 187, 187); width: 7px; position: absolute; top: 0px; opacity: 0.4; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; left: 1px; height: 265.7857142857143px; background-position: initial initial; background-repeat: initial initial;">#}
-{##}
-{#                                    </div>#}
-/*{#                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(234, 234, 234); opacity: 0.2; z-index: 90; left: 1px; background-position: initial initial; background-repeat: initial initial;"></div>#}*/
                                 </div>
 							</div>
 
@@ -141,33 +137,25 @@
 
     jQuery(document).ready(function() {
    // initiate layout and plugins
+        $("#tit").click(function(){
+            $("#tit").css("background", "#bdbdbd")
+        });
+
 
    UIExtendedModals.init();
-   $("#insert").click(function(){
+   $("#delete").click(function(){
        var list ='';
        $("input[type=checkbox]").filter(":checked").each(function(){
-{#           $(this).click();#}
-{#           if($(this). == true){#}
-{#               alert($(this).val());#}
-{#               list += $(this).val()+"__";#}
-               {#           }#}
-
-
-
             var csr = $("input[name=csrfmiddlewaretoken]").val();
            alert(list);
-           $.post("/save/rss",{
+           $.post("/delete/rss",{
                List : list,
                csrfmiddlewaretoken:csr
            },function(data){
                    alert(data);
-               });
-
+           });
        });
-
-
    });
-
-})
+});
 </script>
 {% endblock %}
