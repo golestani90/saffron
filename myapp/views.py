@@ -25,6 +25,7 @@ def admin_news_rss(request):
                            Num_view_news=1, Category_news=entry[i].title)
         Object_news.save()
     #print (entry[0].title)
+    entry = News.objects.all()
     return render(request,'news/admin_news_rss.html', {'entry': entry})
 """========================================================="""
 def admin_news_hand(request):
@@ -48,7 +49,7 @@ def insert_price(request):
         name = request.POST.get('name')
         degree = request.POST.get('degree')
         price = request.POST.get('price')
-        price_g =int(price)/4.7
+        price_g = int(price)/4.7
         price_k = price_g*1000
         #print price_g
     product = Product(Name_pro=name, State_pro=degree, Price_pro=price, Price_pro_g=price_g, Price_pro_k=price_k)
@@ -56,10 +57,6 @@ def insert_price(request):
     messege = u"محصول با موفقیت ثبت شد!"
 
     return render(request, 'shop/insert_price.html', {'msg': messege})
-
-
-
-
 
 """===========================jquery&&ajax==========================================================================="""
 def insert_news_hand(request):
@@ -69,8 +66,8 @@ def insert_news_hand(request):
    #img = request.FILES['pic_news'].name
    #file1 = Image.open(request.FILES['pic_news'])
    #file1.save("myapp/static/img/" + img)
-        Text_news=request.POST.get('body_news')
-        Text_news_len=request.POST.get('body_news_len')
+        Text_news = request.POST.get('body_news')
+        Text_news_len = request.POST.get('body_news_len')
         print(Text_news_len)
         Title_news = request.POST.get('title_news')
         print(Title_news)
@@ -91,27 +88,27 @@ def insert_news_hand(request):
 
 def delete_news_rss(request):
     if request.method == 'POST':
-        List = request.POST.get('List')
-        #if List
-        for i in List:
-            one_news = News.objects.filter(Title_news=i.title)
-            #Object_news = News(Text_news=one_news.description, Title_news=one_news.title)
-            one_news.delete()
-    message=u"تغییرات با موفقیت انجام شد."
-    return (message)
-#def view_experiment(request):
-#    if request.method == "POST":
-#
-#        form = ExpForm(request.POST)
-#        if form.is_valid():
-#            picked = form.cleaned_data.get('category')
-#            category = ",".join([str(c) for c in picked])
-#            return HttpResponse("Multichoiceselect returned {0}".format(category))
-#        else:
-#            return "[ERROR] from views: {0}".format(form.errors)
-#    else:
-#        form = ExpForm()
-#    return render(request, 'template.html', {'form': form})
-
-
-       
+        List = request.POST.get('check')
+        #print(List)
+        #for i in List:
+        #    one_news = News.objects.filter(id=i)
+        #    print one_news
+            #one_news.delete()
+        one = News.objects.filter(id=List)
+        #print one
+        one.delete()
+        message = u"خبر با موفقیت حذف شد!"
+        list_1 = News.objects.all()
+        #for i in list_1:
+         #print(i.id)
+        return render(request, 'news/admin_news_rss.html', {'msg': message, 'entry': list_1})
+"""========================================================="""
+def delete_news_rss1(request,id_news):
+    news2 = News.objects.filter(id=id_news)
+    news2.delete()
+    message = u"خبر با موفقیت حذف شد!"
+    list_1 = News.objects.all()
+    return render(request, 'news/admin_news_rss.html', {'msg': message, 'entry': list_1})
+"""========================================================="""
+def login (request):
+    return render (request, 'login/login.html')

@@ -7,8 +7,8 @@ from django.forms import ModelForm
 #=========================================================================
 class Product(models.Model):
 
-    Name_pro = models.CharField(max_length=50)
-    State_pro = models.CharField(max_length=50)
+    Name_pro = models.CharField(max_length=100)
+    State_pro = models.CharField(max_length=100)
     Price_pro = models.IntegerField()
     Price_pro_g = models.IntegerField()
     Price_pro_k = models.IntegerField()
@@ -23,6 +23,7 @@ class News(models.Model):
     Title_news = models.CharField(max_length=300)
     Time_news = models.DateTimeField()
     Num_view_news = models.IntegerField()
+    id = models.AutoField(primary_key=True)
 
 #create table News(
 #  Link_news varchar(100) primary key,

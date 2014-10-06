@@ -3,7 +3,8 @@
 {% load staticfiles %}
 {% block title %} مدیریت اخبار {% endblock %}
 {% block css %}
-<link href="{% static 'plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css' %}" rel="stylesheet" type="text/css"
+      xmlns="http://www.w3.org/1999/html"/>
 <link href="{% static 'plugins/bootstrap-modal/css/bootstrap-modal.css' %}" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="{% static 'plugins/bootstrap-wysihtml5/bootstrap-wysihtml5-rtl.css' %}"/>
 <link rel="stylesheet" href="{% static 'plugins/bootstrap-wysihtml5/wysiwyg-color.css' %}"/>
@@ -24,75 +25,84 @@
 {% endblock %}
 {% block body %}
     <div class="row">
-    <div class="col-md-12 col-sm-12">
-					<div class="portlet box grey tasks-widget">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-check"></i>rss های امروز
-							</div>
+    <p>{{ msg }}</p>
+    <form action="/delete/news" method="post" enctype="multipart/form-data">
+                        {% csrf_token  %}
+        <div class="col-md-12 col-sm-12">
+            <div class="portlet box grey tasks-widget">
 
-							<div class="actions">
-                                <div class="btn-group">
-									<a class="btn default btn-xs" href="#" id="delete">
-                                        <i class="fa fa-trash-o"></i>
-										حذف
-									</a>
-                                </div>
-                                <div class="btn-group">
-									<a class="btn default btn-xs" id="insert" >
-                                        <i class="fa fa-check"></i>
-										افزودن
-									</a>
-                                </div>
-								<div class="btn-group">
-									<a class="btn default btn-xs" href="#" >
-										 بیشتر <i class="fa fa-angle-down"></i>
-									</a>
-									<ul class="dropdown-menu pull-right">
-										<li>
-											<a href="#">
-												<i class="i"></i> همه rss ها
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												روز گذشته
-											</a>
-										</li>
-										<li>
-											<a href="#">
-											هفته گذشته
-											</a>
-										</li>
-										<li>
-											<a href="#">
-													 انتخاب تاریخ
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="portlet-body" style="overflow-y:visible;">
-							<div class="task-content">
-								<div >
-                                <table  class="table">
-                                    <tbody>
-{#                                    {% setvar ssg = 0 %}#}
-                                    {% for i in entry %}
+
+                <div class="portlet-title">
+                    <div class="caption">
+								<i class="fa fa-check"></i>rss های امروز
+                    </div>
+                    <div class="actions">
+                        <div class="btn-group">
+                            <a class="btn default btn-xs" href="#" id="delete">
+                                <i class="fa fa-trash-o"></i>
+                                <input type="submit" class="btn btn-xs default" value="حذف">
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn default btn-xs" id="insert" >
+                                <i class="fa fa-check"></i>
+                                افزودن
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn default btn-xs" href="#" >
+                                بیشتر <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="#">
+                                        <i class="i"></i> همه rss ها
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        روز گذشته
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        هفته گذشته
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        انتخاب تاریخ
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <div class="portlet-body" style="overflow-y:visible;">
+                     <div class="task-content">
+                         <div >
+                             <table  class="table">
+                                 <tbody>
+                                  {% for i in entry %}
                                      <tr>
-                                      <td style="background: #ffffff">
+                                      <td style="background: #ffffff" class="col-md-4">
                                           <div class="task-checkbox">
-                                             <input type="checkbox" value="{{ i.description }}" id="tit">
-                                              {{ i.title }}
+                                             <input type="checkbox" value="{{ i.id }}" id="tit" name="check">
+{#                                              <input type="hidden" value="{{ i.title }}" name="id">#}
+                                              {{ i.Title_news }}
 										  </div>
                                       </td>
+                                         <td>
+                                           <a href="{% url 'myapp.views.delete_news_rss1' i.id %}">  <i class="fa fa-trash-o">
+
+                                           </i><h6>حذف </h6></a>
+                                         </td>
 {#                                         {% setvar ssg += 1 %}#}
                                        <td>
                                            <div class="portlet">
                                                <div class="portlet-title">
                                                    <div class="caption">
-                                                       <i class="fa fa-reorder"></i><h5>نمایش متن خبر</h5>
+                                                       <i class="fa fa-reorder"></i><h5>نما?ش متن خبر</h5>
                                                    </div>
                                                    <div class="tools">
                                                        <a href="javascript:;" class="expand">
@@ -101,8 +111,8 @@
                                                </div>
                                                <div class="portlet-body display-hide">
                                                    <strong></strong>
-                                                   <p id="des" data-vl="sd_{{ ssg }}">
-                                                   {{ i.description }}
+                                                   <p id="des">
+                                                   {{ i.Text_news_len }}
                                                    </p>
                                                </div>
                                            </div>
@@ -112,17 +122,18 @@
                                      </td>
                                      </tr>
                                     {% endfor %}
-                                    </tbody>
-                                </table>
-                                </div>
-                                </div>
-							</div>
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
 
-						</div>
-					</div>
-				</div>
+            </div>
+
+        </div>
+     </form>
     </div>
-    {% csrf_token %}
+
 {% endblock %}
 {% block js %}
     <script src="{% static "plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" %}"></script>
@@ -137,25 +148,25 @@
 
     jQuery(document).ready(function() {
    // initiate layout and plugins
-        $("#tit").click(function(){
-            $("#tit").css("background", "#bdbdbd")
-        });
+{#        $("#tit").click(function(){#}
+{#            $("#tit").css("background", "#bdbdbd")#}
+{#        });#}
 
 
    UIExtendedModals.init();
-   $("#delete").click(function(){
-       var list ='';
-       $("input[type=checkbox]").filter(":checked").each(function(){
-            var csr = $("input[name=csrfmiddlewaretoken]").val();
-           alert(list);
-           $.post("/delete/rss",{
-               List : list,
-               csrfmiddlewaretoken:csr
-           },function(data){
-                   alert(data);
-           });
-       });
-   });
+{#   $("#delete").click(function(){#}
+{#       var list ='';#}
+{#       $("input[type=checkbox]").filter(":checked").each(function(){#}
+{#            var csr = $("input[name=csrfmiddlewaretoken]").val();#}
+{#           alert(list);#}
+{#           $.post("/delete/rss",{#}
+{#               List : list,#}
+{#               csrfmiddlewaretoken:csr#}
+{#           },function(data){#}
+{#                   alert(data);#}
+{#           });#}
+{#       });#}
+{#   });#}
 });
 </script>
 {% endblock %}
